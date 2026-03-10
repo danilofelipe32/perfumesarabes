@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600&family=Syne:wght@400;500;600;700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap"
         rel="stylesheet">
 
     <!-- Phosphor Icons: Ícones modernos e premium -->
@@ -27,23 +27,21 @@
         tailwind.config = {
             darkMode: "class",
             theme: {
-                extend: {
-                    colors: {
-                        "primary": "#C59D5F", /* Gold/Bronze */
-                        "primary-dark": "#A87B4F",
-                        "sand": "#EAE3D9",
-                        "accent": "#F5EFE6",
-                        "background-light": "#FDFCF8",
-                        "background-dark": "#12100E",
-                        "surface-dark": "#1A1714",
-                    },
-                    fontFamily: {
-                        "display": ["Syne", "sans-serif"],
-                        "body": ["Manrope", "sans-serif"]
-                    },
+                colors: {
+                    "primary": "#D4AF37", /* Ouro Metálico */
+                    "primary-dark": "#b89025",
+                    "sand": "#eaddcf", /* Tom areia claro */
+                    "accent": "#141210",
+                    "background-light": "#fffffc",
+                    "background-dark": "#0F0D0B", /* Onyx Deep */
+                    "surface-dark": "#161310",
+                    "text-muted": "#9d9d9c"
                 },
-            },
-        }
+                fontFamily: {
+                    "display": ["Playfair Display", "Times New Roman", "serif"],
+                    "body": ["Manrope", "Arial", "sans-serif"]
+                },
+            }
     </script>
 
     <style>
@@ -60,7 +58,7 @@
         }
 
         .font-display {
-            font-family: 'Syne', sans-serif;
+            font-family: 'Playfair Display', serif;
         }
 
         /* Ocultar barra de rolagem mas permitir rolar */
@@ -73,23 +71,32 @@
             scrollbar-width: none;
         }
 
-        /* Utilitários Glassmorphism */
-        .glass {
-            background: rgba(253, 252, 248, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+        /* Glassmorphism Agressivo Editorial (Stitch Pro) */
+        .glass-card {
+            background: rgba(15, 13, 11, 0.4);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(212, 175, 55, 0.05);
         }
 
-        .dark .glass {
-            background: rgba(18, 16, 14, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+        .gold-glow-edge {
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.3), inset 0 0 15px rgba(212, 175, 55, 0.15);
         }
 
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+        .gold-text-gradient {
+            background: linear-gradient(135deg, #D4AF37 0%, #F1D592 50%, #A87B4F 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Fundo Super Dark Premium */
+        .bg-hero-cinematic {
+            background-image: linear-gradient(to bottom, rgba(15, 13, 11, 0.2), rgba(15, 13, 11, 1)), url('https://lh3.googleusercontent.com/aida-public/AB6AXuBBAppRvMvafWvI4vLNtOPrXkapXVh-qYC1Sj6PcZ0SdYJTtZXEfuTpdI5WoutdDhLvLKrL_ERfqwqLRe2W0eu-CJ-SMpG33b0WmOv8Zwdpw-37uIGRWQ9poYukoHdSIbQZBgCWx4t-oVGT76yQKTwnkd2d0jEz2jYmiWHNHMzQA78KQAzEUMlODPs36l0pe6SaUQAg8E3BF-izSgZEedAtn5QFPAb3-Tpah3KbFktbWqSXcBDUf55W8m88oUKDyWUth8qBZ-524cvi');
+            background-size: cover;
+            background-position: center 80%;
+            background-attachment: fixed;
         }
 
         /* Efeitos Hover de Imagem */
@@ -121,18 +128,90 @@
             width: fit-content;
             animation: marquee 30s linear infinite;
         }
+
+        /* Custom Cursor */
+        @media (pointer: fine) {
+            body {
+                cursor: none;
+            }
+
+            .custom-cursor {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 20px;
+                height: 20px;
+                border: 1px solid var(--cursor-color, #d4af37);
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 9999;
+                transform: translate(-50%, -50%);
+                transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease;
+                mix-blend-mode: difference;
+            }
+
+            .custom-cursor-dot {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 4px;
+                height: 4px;
+                background-color: var(--cursor-color, #d4af37);
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 10000;
+                transform: translate(-50%, -50%);
+            }
+
+            .custom-cursor.hover {
+                width: 50px;
+                height: 50px;
+                background-color: rgba(212, 175, 55, 0.1);
+            }
+        }
+
+        /* Preloader */
+        #preloader {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            background-color: #0a0a0a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #d4af37;
+        }
+
+        #preloader-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            letter-spacing: 0.5em;
+            text-transform: uppercase;
+            clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+        }
     </style>
 </head>
 
 <body class="antialiased selection:bg-primary selection:text-white transition-colors duration-500">
 
+    <!-- Preloader -->
+    <div id="preloader">
+        <div id="preloader-text">Oasis</div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor hidden md:block"></div>
+    <div class="custom-cursor-dot hidden md:block"></div>
+
     <!-- Navegação -->
-    <nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 px-6 py-6 md:px-12 glass">
+    <nav id="navbar"
+        class="fixed top-0 left-0 w-full z-50 transition-all duration-300 px-6 py-6 md:px-12 glass-card border-x-0 border-t-0">
         <div class="max-w-[1600px] mx-auto flex items-center justify-between">
             <!-- Logo -->
             <a href="#" class="flex items-center gap-3 group">
                 <i class="ph-fill ph-drop text-primary text-3xl group-hover:scale-110 transition-transform"></i>
-                <span class="font-display font-bold text-2xl tracking-[0.15em] uppercase">Oasis</span>
+                <span
+                    class="font-display font-medium text-2xl tracking-[0.2em] uppercase gold-text-gradient">Oasis</span>
             </a>
 
             <!-- Links Centrais -->
@@ -194,7 +273,8 @@
             <button onclick="toggleSearch()"
                 class="absolute top-8 right-8 text-primary hover:rotate-90 transition-transform duration-500"><i
                     class="ph-light ph-x text-4xl"></i></button>
-            <h2 class="font-display text-3xl md:text-4xl mb-2 text-center">O que você procura?</h2>
+            <h2 class="font-display text-4xl md:text-5xl mb-2 text-center text-primary font-medium italic">O que
+                procura?</h2>
             <div class="w-full max-w-3xl relative">
                 <input type="text" placeholder="Ex: Saphir, Oud, Rosa..."
                     class="w-full bg-transparent border-b border-primary/50 text-xl md:text-3xl py-4 px-12 text-center text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-primary transition-colors">
@@ -214,49 +294,79 @@
         </div>
     </div>
 
-    <!-- Hero Section (Split Screen) -->
-    <section id="home" class="min-h-screen flex flex-col md:flex-row pt-20 md:pt-0">
-        <!-- Text Content -->
-        <div class="w-full md:w-1/2 flex flex-col justify-center px-6 md:px-16 lg:px-24 py-12 md:py-0 z-10 gs-reveal">
-            <div class="flex items-center gap-3 mb-8">
-                <div class="w-12 h-[1px] bg-primary"></div>
-                <span class="font-display text-xs font-bold tracking-[0.4em] uppercase text-primary">Parfum
-                    d'Exception</span>
-            </div>
+    <!-- Hero Section (Ultra-High-End Editorial) -->
+    <main id="home" class="relative min-h-[110vh] flex items-center justify-center pt-24 bg-hero-cinematic gs-reveal">
+        <div
+            class="relative z-10 w-full px-6 flex flex-col md:flex-row items-center justify-center gap-12 lg:gap-24 max-w-[1400px]">
 
-            <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-[1.05] tracking-tight mb-8">
-                A Arte de <br>
-                <span class="text-primary italic font-light">Respirar</span><br>
-                o Deserto.
-            </h1>
-
-            <p class="text-lg md:text-xl font-light text-slate-500 dark:text-slate-400 max-w-md leading-relaxed mb-12">
-                Onde a areia encontra o oásis. Fragrâncias que traduzem o luxo do silêncio em aromas imortais.
-            </p>
-
-            <div class="flex flex-col sm:flex-row gap-6">
-                <a href="#colecao"
-                    class="group relative px-10 py-5 bg-primary text-background-light overflow-hidden flex items-center justify-center">
+            <!-- Glassmorphism Card (Product Focus) -->
+            <div class="w-full md:w-[45%] lg:w-[40%]">
+                <div
+                    class="glass-card gold-glow-edge px-8 py-20 md:py-32 flex flex-col items-center justify-center relative overflow-hidden group">
+                    <!-- Ornamental Borders -->
                     <div
-                        class="absolute inset-0 bg-black translate-y-[100%] group-hover:translate-y-0 transition-transform duration-500 ease-in-out">
+                        class="absolute top-0 right-0 w-16 h-16 border-t border-r border-primary/40 transition-all duration-700 group-hover:w-full group-hover:h-full group-hover:opacity-20">
                     </div>
-                    <span class="relative z-10 font-display text-xs font-bold tracking-[0.2em] uppercase">Descubra a
-                        Coleção</span>
-                    <i
-                        class="ph-bold ph-arrow-right relative z-10 ml-3 group-hover:translate-x-2 transition-transform duration-300"></i>
-                </a>
+                    <div
+                        class="absolute bottom-0 left-0 w-16 h-16 border-b border-l border-primary/40 transition-all duration-700 group-hover:w-full group-hover:h-full group-hover:opacity-20">
+                    </div>
+
+                    <span
+                        class="text-primary text-[10px] sm:text-xs font-bold tracking-[0.3em] uppercase mb-12 block">Héritage
+                        Royal</span>
+
+                    <div
+                        class="relative w-full max-w-[280px] aspect-[4/5] flex items-center justify-center mb-12 img-hover-zoom">
+                        <div class="absolute inset-0 bg-primary/30 rounded-full blur-[90px] opacity-60"></div>
+                        <img alt="Saphir D'Oud Perfume"
+                            class="relative z-20 w-full h-full object-contain filter drop-shadow-[0_20px_50px_rgba(0,0,0,0.9)]"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuANlhQH0QxkAv3tN41kaPClbJj2GlcocdhU0VfwaPXlu2fu2kZUFVCzSOplg1c-sX-xe2mU1GVrVatVSc2V1s7iVrEBTrhwZfW5V_-4-p1_pF4MPnrmqrw3ulGU7lSKPC-5ufy3yObSUPTmV6kMd2VDk4zIAMyB_HoBM6WY0uOXpcqTk1HBqnrGIDlTvficQMpDzAHK3I5c4b0TyYqLsUSfdy4oUnFGep7H9VbUeWb2WSt4ImQRiBWom91hwpHRvj7XDZJmzhu6h9xM">
+                    </div>
+
+                    <h2
+                        class="font-display text-2xl sm:text-4xl text-center leading-tight tracking-[0.1em] mb-4 text-white">
+                        <span class="gold-text-gradient font-bold">SAPHIR</span> OUD
+                    </h2>
+                    <p class="text-white/60 text-center text-xs sm:text-sm font-light leading-relaxed max-w-xs mb-10">
+                        O tesouro escondido sob as dunas vibrantes. Uma luxuosa viagem olfativa através de tempos
+                        imemoriais.
+                    </p>
+
+                    <button
+                        onclick="openCheckout('Saphir d\'Oud', 599, 'https://lh3.googleusercontent.com/aida-public/AB6AXuANlhQH0QxkAv3tN41kaPClbJj2GlcocdhU0VfwaPXlu2fu2kZUFVCzSOplg1c-sX-xe2mU1GVrVatVSc2V1s7iVrEBTrhwZfW5V_-4-p1_pF4MPnrmqrw3ulGU7lSKPC-5ufy3yObSUPTmV6kMd2VDk4zIAMyB_HoBM6WY0uOXpcqTk1HBqnrGIDlTvficQMpDzAHK3I5c4b0TyYqLsUSfdy4oUnFGep7H9VbUeWb2WSt4ImQRiBWom91hwpHRvj7XDZJmzhu6h9xM')"
+                        class="relative group overflow-hidden border border-primary px-12 py-5 w-full max-w-[280px]">
+                        <div
+                            class="absolute inset-0 bg-primary translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out">
+                        </div>
+                        <span
+                            class="relative z-10 text-[10px] font-bold tracking-[0.3em] uppercase group-hover:text-black transition-colors duration-300 text-white">Adquirir
+                            Coleção</span>
+                    </button>
+                </div>
             </div>
+
+            <!-- Title Content -->
+            <div class="w-full md:w-[50%] flex flex-col justify-center items-start lg:pl-10">
+                <div class="h-[1px] w-24 bg-gradient-to-r from-primary to-transparent mb-8"></div>
+                <h1
+                    class="font-display text-5xl sm:text-6xl md:text-[5rem] lg:text-[7rem] font-medium leading-[0.95] tracking-tight mb-8 text-white">
+                    A ESSÊNCIA <br>
+                    DO <span class="gold-text-gradient italic font-light">DESERTO</span>
+                </h1>
+                <p class="text-white/50 text-base sm:text-lg font-light leading-relaxed max-w-md hidden md:block">
+                    Sofisticação e mistério em cada gota. Uma jornada sensorial através das areias infinitas sob o
+                    majestoso céu dourado.
+                </p>
+            </div>
+
         </div>
 
-        <!-- Image Content -->
-        <div class="w-full md:w-1/2 h-[60vh] md:h-screen relative overflow-hidden gs-reveal-img">
-            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuvcQbMSsghgvSW21G4GjA6H3zAHdsTSXutj48VrOHxjaPfTK9qNY4akMdkz_0LiU8hDmKW1ZHQ8SQJGVjX-_kkp0iw5Q2pdz8trqY8nx32H9tfK0ED5t2dPqG3VamYCTDy1aVrptG1C4S1gjUqZPFlTWbIX3d2ZU6tv_BLdMGjJowb_dNABJAzZgi7neUNlAP1VqVaLUPHvWh_cBzXqfV9N7pW0FnKEwPdGyqJjHSPvRvtaqaZ8w_UlCTEaF5u_AKQrZ8MB09tmKp"
-                alt="Perfume Luxuoso" class="absolute inset-0 w-full h-full object-cover scale-105" id="hero-img">
-            <div
-                class="absolute inset-0 bg-gradient-to-t from-background-light/80 dark:from-background-dark/80 via-transparent to-transparent md:bg-gradient-to-l">
-            </div>
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-12 right-6 lg:right-12 z-40 flex flex-col items-center gap-4 opacity-50">
+            <div class="h-20 w-[1px] bg-gradient-to-t from-primary to-transparent"></div>
+            <span class="text-[9px] tracking-[0.4em] uppercase [writing-mode:vertical-rl] text-white">Descubra</span>
         </div>
-    </section>
+    </main>
 
     <!-- Marquee de Ingredientes -->
     <div
@@ -417,8 +527,12 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 md:gap-10">
             <!-- Produto 1 -->
             <div class="flex flex-col group gs-up">
-                <div class="relative aspect-[3/4] bg-accent dark:bg-surface-dark mb-8 flex items-center justify-center p-12 overflow-hidden cursor-pointer"
+                <div class="relative aspect-[3/4] glass-panel mb-8 flex items-center justify-center p-12 overflow-hidden cursor-pointer"
                     onclick="openCheckout('Saphir d\'Oud', 599, 'https://lh3.googleusercontent.com/aida-public/AB6AXuANlhQH0QxkAv3tN41kaPClbJj2GlcocdhU0VfwaPXlu2fu2kZUFVCzSOplg1c-sX-xe2mU1GVrVatVSc2V1s7iVrEBTrhwZfW5V_-4-p1_pF4MPnrmqrw3ulGU7lSKPC-5ufy3yObSUPTmV6kMd2VDk4zIAMyB_HoBM6WY0uOXpcqTk1HBqnrGIDlTvficQMpDzAHK3I5c4b0TyYqLsUSfdy4oUnFGep7H9VbUeWb2WSt4ImQRiBWom91hwpHRvj7XDZJmzhu6h9xM')">
+                    <!-- Textura de vidro e reflexo por cima da imagem -->
+                    <div
+                        class="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent z-10 pointer-events-none mix-blend-overlay">
+                    </div>
                     <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?q=80&w=800&auto=format&fit=crop"
                         alt="Saphir d'Oud"
                         class="w-full h-full object-cover object-center absolute inset-0 opacity-80 group-hover:scale-110 transition-transform duration-700 ease-out">
@@ -427,8 +541,8 @@
                     <div
                         class="absolute bottom-8 left-1/2 -translate-x-1/2 translate-y-20 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 z-20 w-[80%]">
                         <button
-                            class="w-full bg-background-light text-slate-900 font-display text-xs font-bold uppercase tracking-widest py-4 hover:bg-primary hover:text-white transition-colors shadow-2xl flex items-center justify-center gap-2">
-                            <i class="ph-bold ph-shopping-bag"></i> Adquirir
+                            class="w-full bg-background-light/90 backdrop-blur-md border border-primary text-primary font-body text-[10px] font-bold uppercase tracking-[0.3em] py-5 hover:bg-primary hover:text-white transition-colors duration-500 shadow-2xl flex items-center justify-center gap-2">
+                            Adquirir
                         </button>
                     </div>
                 </div>
@@ -441,8 +555,12 @@
 
             <!-- Produto 2 -->
             <div class="flex flex-col group gs-up" style="transition-delay: 150ms;">
-                <div class="relative aspect-[3/4] bg-accent dark:bg-surface-dark mb-8 flex items-center justify-center p-12 overflow-hidden cursor-pointer"
+                <div class="relative aspect-[3/4] glass-panel mb-8 flex items-center justify-center p-12 overflow-hidden cursor-pointer"
                     onclick="openCheckout('Sand Mystériux', 489, 'https://lh3.googleusercontent.com/aida-public/AB6AXuAHL0CSfCn0ESf-uSOSDts-Iy8HX6fCK1WfvME_PbUBwIr0PfTDd8ttxGLe_i9F62jkPuXt-p1td0pxfFVjZl6RCrz46hBf3Od99AIqSGqMlc-5F2tLsvhsbOseOH9GdxzEe2YRuE_u9C0yKmC0CgsWhR_trM0uUSd61X4lkjDrW0d-3JHgBUsXzwr0TjJhYQLeNeEsoTmuQLK7aHW9JVOB7rZFqCq-Fn1RcekDU_-avKOg3Yt32irxsJitbAw4mJ9xmVKFJwcSLSaT')">
+                    <!-- Textura de vidro e reflexo por cima da imagem -->
+                    <div
+                        class="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent z-10 pointer-events-none mix-blend-overlay">
+                    </div>
                     <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHL0CSfCn0ESf-uSOSDts-Iy8HX6fCK1WfvME_PbUBwIr0PfTDd8ttxGLe_i9F62jkPuXt-p1td0pxfFVjZl6RCrz46hBf3Od99AIqSGqMlc-5F2tLsvhsbOseOH9GdxzEe2YRuE_u9C0yKmC0CgsWhR_trM0uUSd61X4lkjDrW0d-3JHgBUsXzwr0TjJhYQLeNeEsoTmuQLK7aHW9JVOB7rZFqCq-Fn1RcekDU_-avKOg3Yt32irxsJitbAw4mJ9xmVKFJwcSLSaT"
                         alt="Sand Mystériux"
                         class="w-full h-full object-cover object-center absolute inset-0 opacity-80 group-hover:scale-110 transition-transform duration-700 ease-out">
@@ -450,8 +568,8 @@
                     <div
                         class="absolute bottom-8 left-1/2 -translate-x-1/2 translate-y-20 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 z-20 w-[80%]">
                         <button
-                            class="w-full bg-background-light text-slate-900 font-display text-xs font-bold uppercase tracking-widest py-4 hover:bg-primary hover:text-white transition-colors shadow-2xl flex items-center justify-center gap-2">
-                            <i class="ph-bold ph-shopping-bag"></i> Adquirir
+                            class="w-full bg-background-light/90 backdrop-blur-md border border-primary text-primary font-body text-[10px] font-bold uppercase tracking-[0.3em] py-5 hover:bg-primary hover:text-white transition-colors duration-500 shadow-2xl flex items-center justify-center gap-2">
+                            Adquirir
                         </button>
                     </div>
                 </div>
@@ -464,8 +582,12 @@
 
             <!-- Produto 3 -->
             <div class="flex flex-col group gs-up" style="transition-delay: 300ms;">
-                <div class="relative aspect-[3/4] bg-accent dark:bg-surface-dark mb-8 flex items-center justify-center p-12 overflow-hidden cursor-pointer"
+                <div class="relative aspect-[3/4] glass-panel mb-8 flex items-center justify-center p-12 overflow-hidden cursor-pointer"
                     onclick="openCheckout('Aura Dorée', 645, 'https://lh3.googleusercontent.com/aida-public/AB6AXuD66NS1B3-k_WT18QWIPq3JKwsB0QNnaG0Euq1egfdC1VgYI-m_mTpvtHcScCahPdtrfmIKETfj_ae0UblwNabiaVnlnshTVQAgOy2ce06CYC1riLfHoJRp_h5DhNrY27MDNMuwOdvb32GvZ3ZNvocoK4ef-m3GFHDFiXsPD7RlaApbJXWGUNQeE5wKUcXyMrhqxqtAclV0-inipe86FbYz7n3q3zdKyBPiofaTHs6Wh1F9fMD0qh0HzusvkGF_Rvvw-43CeCYo-Kbg')">
+                    <!-- Textura de vidro e reflexo por cima da imagem -->
+                    <div
+                        class="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent z-10 pointer-events-none mix-blend-overlay">
+                    </div>
                     <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD66NS1B3-k_WT18QWIPq3JKwsB0QNnaG0Euq1egfdC1VgYI-m_mTpvtHcScCahPdtrfmIKETfj_ae0UblwNabiaVnlnshTVQAgOy2ce06CYC1riLfHoJRp_h5DhNrY27MDNMuwOdvb32GvZ3ZNvocoK4ef-m3GFHDFiXsPD7RlaApbJXWGUNQeE5wKUcXyMrhqxqtAclV0-inipe86FbYz7n3q3zdKyBPiofaTHs6Wh1F9fMD0qh0HzusvkGF_Rvvw-43CeCYo-Kbg"
                         alt="Aura Dorée"
                         class="w-full h-full object-cover object-center absolute inset-0 opacity-80 group-hover:scale-110 transition-transform duration-700 ease-out">
@@ -473,8 +595,8 @@
                     <div
                         class="absolute bottom-8 left-1/2 -translate-x-1/2 translate-y-20 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 z-20 w-[80%]">
                         <button
-                            class="w-full bg-background-light text-slate-900 font-display text-xs font-bold uppercase tracking-widest py-4 hover:bg-primary hover:text-white transition-colors shadow-2xl flex items-center justify-center gap-2">
-                            <i class="ph-bold ph-shopping-bag"></i> Adquirir
+                            class="w-full bg-background-light/90 backdrop-blur-md border border-primary text-primary font-body text-[10px] font-bold uppercase tracking-[0.3em] py-5 hover:bg-primary hover:text-white transition-colors duration-500 shadow-2xl flex items-center justify-center gap-2">
+                            Adquirir
                         </button>
                     </div>
                 </div>
@@ -646,12 +768,10 @@
             <footer
                 class="p-8 border-t border-black/5 dark:border-white/5 bg-background-light dark:bg-background-dark relative">
                 <button
-                    class="w-full bg-primary text-white py-6 font-display font-bold tracking-[0.3em] uppercase text-xs shadow-xl shadow-primary/20 hover:bg-black transition-colors flex items-center justify-center gap-3 group"
+                    class="w-full border border-primary text-primary py-6 font-body font-bold tracking-[0.3em] uppercase text-[10px] hover:bg-primary hover:text-white transition-colors duration-500 flex items-center justify-center gap-3 group"
                     onclick="completePurchase()">
-                    <i class="ph-bold ph-lock-key"></i>
-                    Completar Pedido
-                    <i
-                        class="ph-bold ph-arrow-right opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all absolute right-8"></i>
+                    <i class="ph-light ph-lock-key text-lg"></i>
+                    Finalizar Pedido
                 </button>
             </footer>
         </div>
@@ -661,9 +781,9 @@
     <script>
         // Lógica do Carrinho
         let cartItems = 0;
-        const cartCount = document.getElementById('cart-count');
+            const cartCount = document.getElementById('cart-count');
 
-        function addToCart() {
+            function addToCart() {
             cartItems++;
             cartCount.innerText = cartItems;
 
@@ -908,6 +1028,62 @@
                     }
                 );
             });
+
+            // Preloader Animation
+            const tl = gsap.timeline();
+            tl.to("#preloader-text", {
+                clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+                duration: 1.2,
+                ease: "power4.inOut"
+            })
+                .to("#preloader-text", {
+                    opacity: 0,
+                    duration: 0.5,
+                    delay: 0.3
+                })
+                .to("#preloader", {
+                    yPercent: -100,
+                    duration: 1,
+                    ease: "power4.inOut"
+                })
+                .set("#preloader", { display: "none" });
+
+            // Custom Cursor Logic
+            if (window.matchMedia("(pointer: fine)").matches) {
+                const cursor = document.querySelector('.custom-cursor');
+                const cursorDot = document.querySelector('.custom-cursor-dot');
+
+                let mouseX = window.innerWidth / 2;
+                let mouseY = window.innerHeight / 2;
+                let cursorX = mouseX;
+                let cursorY = mouseY;
+
+                window.addEventListener('mousemove', (e) => {
+                    mouseX = e.clientX;
+                    mouseY = e.clientY;
+
+                    // Dot tracks perfectly
+                    cursorDot.style.left = mouseX + 'px';
+                    cursorDot.style.top = mouseY + 'px';
+                });
+
+                // Outer circle follows with slight delay
+                function renderCursor() {
+                    cursorX += (mouseX - cursorX) * 0.15;
+                    cursorY += (mouseY - cursorY) * 0.15;
+                    cursor.style.left = cursorX + 'px';
+                    cursor.style.top = cursorY + 'px';
+                    requestAnimationFrame(renderCursor);
+                }
+                renderCursor();
+
+                // Hover effects
+                const hoverElements = document.querySelectorAll('a, button, .cursor-pointer');
+                hoverElements.forEach(el => {
+                    el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+                    el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+                });
+            }
         });
     </script>
 </body>
